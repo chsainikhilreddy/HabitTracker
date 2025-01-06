@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Habit Logs</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4" th:text="'Logs for Habit: ' + ${habit.name}"></h2>
+
+        <!-- Habit Logs Table -->
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="log : ${logs}">
+                    <td th:text="${log.logDate}"></td>
+                    <td th:text="${log.completed ? 'Yes' : 'No'}"></td>
+                    <td>
+                        <a th:href="@{/habit-logs/{habitId}/edit/{logId}(habitId=${habit.id}, logId=${log.id})}" 
+                           class="btn btn-warning btn-sm me-1">Edit</a>
+                        <form th:action="@{/habit-logs/{habitId}/delete/{logId}(habitId=${habit.id}, logId=${log.id})}" 
+                              style="display: inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Buttons for Additional Actions -->
+        <div class="d-flex justify-content-between mt-4">
+            <a th:href="@{/habit-logs/{id}/add(id=${habit.id})}" class="btn btn-primary">Add New Log</a>
+            <a th:href="@{/habits}" class="btn btn-secondary">Back to Habits</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Notification</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Edit Notification</h2>
+
+        <form th:action="@{/notifications/edit/{id}(id=${notification.id})}" th:object="${notification}" method="post">
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" th:field="*{message}" class="form-control" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="recipient" class="form-label">Recipient</label>
+                <select id="recipient" name="userId" class="form-select" required>
+                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"
+                            th:selected="${notification.recipient.id == user.id}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a th:href="@{/notifications}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

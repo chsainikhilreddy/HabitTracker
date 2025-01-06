@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Habit List</title>
+</head>
+<body>
+    <h2>Your Habits</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Frequency</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="habit : ${habits}">
+                <td th:text="${habit.name}"></td>
+                <td th:text="${habit.description}"></td>
+                <td th:text="${habit.frequency}"></td>
+                <td>
+                    <a th:href="@{/habits/delete/{id}(id=${habit.id})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/habits/add}">Add a New Habit</a>
+</body>
+</html>

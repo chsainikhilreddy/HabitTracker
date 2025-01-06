@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Habit</title>
+</head>
+<body>
+    <h2>Add a New Habit</h2>
+    <form th:action="@{/habits/add}" th:object="${habit}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" th:field="*{name}" /><br />
+
+        <label for="description">Description:</label>
+        <textarea id="description" th:field="*{description}"></textarea><br />
+
+        <label for="frequency">Frequency:</label>
+        <select id="frequency" th:field="*{frequency}">
+            <option value="Daily">Daily</option>
+            <option value="Weekly">Weekly</option>
+            <option value="Monthly">Monthly</option>
+        </select><br />
+
+        <button type="submit">Add Habit</button>
+    </form>
+</body>
+</html>

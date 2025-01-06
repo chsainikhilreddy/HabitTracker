@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Notification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            color: #555555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+            resize: none;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+        }
+
+        .form-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Notification</h2>
+
+        <form th:action="@{/notifications/add}" th:object="${notification}" method="post">
+            <div class="mb-3">
+                <label for="message">Message</label>
+                <textarea id="message" th:field="*{message}" rows="4" placeholder="Enter the notification message" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="recipient">Recipient</label>
+                <select id="recipient" name="userId" class="form-select" required>
+                    <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+                </select>
+            </div>
+            <button type="submit">Send Notification</button>
+        </form>
+
+        <a th:href="@{/notifications}">Back</a>
+    </div>
+</body>
+</html>

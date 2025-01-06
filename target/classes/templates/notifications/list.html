@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notifications</title>
+</head>
+<body>
+    <h2>Your Notifications</h2>
+
+    <ul>
+        <li th:each="notification : ${notifications}">
+            <span th:text="${notification.message}"></span> - 
+            <span th:text="${#dates.format(notification.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+        </li>
+    </ul>
+
+    <a th:href="@{/habits}">Back</a>
+</body>
+</html>
